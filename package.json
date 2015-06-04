@@ -1,0 +1,31 @@
+{
+  "name": "config-layered",
+  "version": "1.0.0",
+  "description": "A Config loader that allows multiple nested configs, specified as Javascript files, that inherit from a parent. The root config, all.js, is loaded first. Then, for each entry in a hyphen-separated NODE_ENV, another config is merged in.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha ./*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sc0ttyd/config-layered.git"
+  },
+  "keywords": [
+    "config",
+    "nested",
+    "layered",
+    "nested",
+    "config",
+    "layered",
+    "config"
+  ],
+  "author": "Scott Donnelly",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/sc0ttyd/config-layered/issues"
+  },
+  "homepage": "https://github.com/sc0ttyd/config-layered#readme"
+}
