@@ -10,7 +10,8 @@ describe('config-layered', function() {
     });
 
     it('should return an empty object when loading from an empty config folder', function() {
-        expect(config('config-empty')).to.equal({});
+        expect(config('config-empty')).to.be.an('object');
+        expect(config('config-empty')).to.be.empty;
     });
 
     it('should return the exported object from all.js when loading from an config folder containing only an all.js', function() {
@@ -18,7 +19,7 @@ describe('config-layered', function() {
     });
 
     it('should handle a nested config that overwrites a property of all', function() {
-        expect(config('config-only-all').name).to.equal('nested');
-        expect(config('config-only-all').base).to.equal('all');
+        expect(config('config-nested').name).to.equal('nested');
+        expect(config('config-nested').base).to.equal('all');
     });
 });

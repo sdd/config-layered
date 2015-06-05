@@ -22,10 +22,14 @@
   "author": "Scott Donnelly",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^3.0.0",
     "mocha": "^2.0.1"
   },
   "bugs": {
     "url": "https://github.com/sc0ttyd/config-layered/issues"
   },
-  "homepage": "https://github.com/sc0ttyd/config-layered#readme"
+  "homepage": "https://github.com/sc0ttyd/config-layered#readme",
+  "dependencies": {
+    "lodash": "^3.9.3"
+  }
 }
