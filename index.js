@@ -10,7 +10,8 @@ module.exports = function(dir, options) {
 	dir = path.join(process.cwd(), dir || 'config');
 
 	var defaults = {
-		base: 'all'
+		base: 'all',
+		logMissing: false
 	};
 	var opt = assign(defaults, options);
 
@@ -20,7 +21,7 @@ module.exports = function(dir, options) {
 	try {
 		baseConfig = require(basePath);
 	} catch (e) {
-		console.log('Missing config file: \'' + basePath + '.js\'');
+		opt.logMissing && console.error('Missing config file: \'' + basePath + '.js\'');
 	}
 
 	return reduce(envs,
@@ -32,7 +33,7 @@ module.exports = function(dir, options) {
 			try {
 				acc = merge(acc, require(layerPath));
 			} catch (e) {
-				console.log('Missing config file ' + confPath);
+				opt.logMissing && console.error('Missing config file: \'' + layerPath + '.js\'');
 			}
 			return acc;
 		},

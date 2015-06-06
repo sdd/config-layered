@@ -1,7 +1,11 @@
 'use strict';
 
-var expect  = require('chai').expect,
+var chai    = require('chai'),
+	expect  = chai.expect,
+    sinon   = require('sinon'),
     config  = require('../index');
+
+chai.use(require('sinon-chai'));
 
 describe('config-layered', function() {
 
@@ -22,4 +26,12 @@ describe('config-layered', function() {
         expect(config('config-nested').name).to.equal('nested');
         expect(config('config-nested').base).to.equal('all');
     });
+
+	it('should log to console if opts.logMissing is true and a config file is missing', function() {
+		var consoleSpy = sinon.spy(console, 'error');
+		config('config-empty', { logMissing: true  });
+
+		expect(consoleSpy).to.always.have.been.calledWithMatch(/Missing config file/);
+		expect(consoleSpy).to.have.been.calledTwice;
+	});
 });
