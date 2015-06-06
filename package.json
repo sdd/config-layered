@@ -1,6 +1,6 @@
 {
   "name": "config-layered",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A Config loader that allows multiple nested configs, specified as Javascript files, that inherit from a parent. The root config, all.js, is loaded first. Then, for each entry in a hyphen-separated NODE_ENV, another config is merged in.",
   "main": "index.js",
   "scripts": {
