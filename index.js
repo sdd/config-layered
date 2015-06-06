@@ -7,7 +7,7 @@ var path = require('path'),
 var envs = (process.env.NODE_ENV || 'dev').split('-');
 
 module.exports = function(dir, options) {
-	dir = dir || 'config';
+	dir = path.join(process.cwd(), dir || 'config');
 
 	var defaults = {
 		base: 'all'
@@ -15,7 +15,8 @@ module.exports = function(dir, options) {
 	var opt = assign(defaults, options);
 
 	var baseConfig = {};
-	var basePath   = path.join(__dirname, test ? 'test' : '..', test ? '' : '..', dir, opt.base);
+	var basePath   = path.join(dir, opt.base);
+
 	try {
 		baseConfig = require(basePath);
 	} catch (e) {
@@ -27,7 +28,7 @@ module.exports = function(dir, options) {
 
 			var nextLayer = envs.slice(0, idx + 1).join('-');
 
-			var confPath = path.join(__dirname, test ? 'test' : '..', test ? '' : '..', dir, nextLayer);
+			var layerPath = path.join(dir, nextLayer);
 			try {
 				acc = merge(acc, require(layerPath));
 			} catch (e) {
