@@ -1,38 +1,40 @@
 'use strict';
 var path = require('path'),
-       _ = require('lodash');
+    _    = require('lodash');
 
 var envs = (process.env.NODE_ENV || 'dev').split('-');
 
 module.exports = function(dir, options) {
-    dir = dir || 'config';
+	dir = dir || 'config';
 
-    var defaults = {
-        base: 'all'
-    };
-    var opt = _.extend(defaults, options);
+	var defaults = {
+		base: 'all'
+	};
+	var opt      = _.extend(defaults, options);
 
-    var baseConfig = {};
-    var basePath = path.join(__dirname, process.env.NODE_ENV=='test'?'test':'', dir, opt.base);
-    try{
-        baseConfig = require(basePath);
-    } catch (e) {
-        console.log('Missing config file: \'' + basePath + '.js\'');
-    }
+	var test = process.env.NODE_ENV == 'test-configLayered';
 
-    return _.reduce(envs,
-        function (acc, env, idx, envs) {
+	var baseConfig = {};
+	var basePath   = path.join(__dirname, test ? 'test' : '..', test ? '' : '..', dir, opt.base);
+	try {
+		baseConfig = require(basePath);
+	} catch (e) {
+		console.log('Missing config file: \'' + basePath + '.js\'');
+	}
 
-            var nextLayer = envs.slice(0, idx + 1).join('-');
+	return _.reduce(envs,
+		function(acc, env, idx, envs) {
 
-            var confPath = path.join(__dirname, process.env.NODE_ENV=='test'?'test':'', dir, nextLayer);
-            try {
-                acc = _.merge(acc, require(confPath));
-            } catch (e) {
-                console.log('Missing config file ' + confPath);
-            }
-            return acc;
-        },
-        baseConfig
-    );
+			var nextLayer = envs.slice(0, idx + 1).join('-');
+
+			var confPath = path.join(__dirname, test ? 'test' : '..', test ? '' : '..', dir, nextLayer);
+			try {
+				acc = _.merge(acc, require(confPath));
+			} catch (e) {
+				console.log('Missing config file ' + confPath);
+			}
+			return acc;
+		},
+		baseConfig
+	);
 };

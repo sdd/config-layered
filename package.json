@@ -4,7 +4,7 @@
   "description": "A Config loader that allows multiple nested configs, specified as Javascript files, that inherit from a parent. The root config, all.js, is loaded first. Then, for each entry in a hyphen-separated NODE_ENV, another config is merged in.",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha ./test/*.test.js"
+    "test": "NODE_ENV=test-configLayered ./node_modules/mocha/bin/mocha ./test/*.test.js"
   },
   "repository": {
     "type": "git",
