@@ -7,8 +7,8 @@ an extra config is merged in.
 
 E.g:
 
-NODE_ENV = dev: Files loaded = all.js, dev.js
-NODE_ENV = test-unit: Files loaded = all.js, test.js, test-unit.js
+- NODE_ENV = dev: Files loaded = all.js, dev.js
+- NODE_ENV = test-unit: Files loaded = all.js, test.js, test-unit.js
 
 ## Usage
 
